@@ -1,0 +1,144 @@
+/* content.css
+Purpose: Minimal styling for content script elements
+Contains:
+
+Progress overlay styling
+Highlight effects for processed job cards
+Error message styling
+Hidden elements for data extraction */
+
+/* content/content.css */
+/* Styles for content script injected into LinkedIn pages */
+
+/* Progress indicator overlay */
+.linkedin-scraper-overlay {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    z-index: 10000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    max-width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.linkedin-scraper-overlay .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.linkedin-scraper-overlay .progress-fill {
+    height: 100%;
+    background: #0073b1;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.linkedin-scraper-overlay .status-message {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.linkedin-scraper-overlay .progress-stats {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+/* Highlight scraped job cards */
+.linkedin-scraper-processed {
+    border-left: 3px solid #0073b1 !important;
+    background: rgba(0, 115, 177, 0.05) !important;
+}
+
+/* Loading indicator for job details */
+.linkedin-scraper-loading {
+    position: relative;
+}
+
+.linkedin-scraper-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #0073b1;
+    border-radius: 50%;
+    animation: linkedin-scraper-spin 1s linear infinite;
+}
+
+@keyframes linkedin-scraper-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error indicator */
+.linkedin-scraper-error {
+    border-left: 3px solid #d32f2f !important;
+    background: rgba(211, 47, 47, 0.05) !important;
+}
+
+/* Success indicator */
+.linkedin-scraper-success {
+    border-left: 3px solid #388e3c !important;
+    background: rgba(56, 142, 60, 0.05) !important;
+}
+
+/* Hide default LinkedIn elements that might interfere */
+.linkedin-scraper-overlay * {
+    box-sizing: border-box;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .linkedin-scraper-overlay {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        font-size: 13px;
+    }
+}
+
+/* Animation for overlay appearance */
+.linkedin-scraper-overlay {
+    animation: linkedin-scraper-slideIn 0.3s ease-out;
+}
+
+@keyframes linkedin-scraper-slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Fade out animation */
+.linkedin-scraper-overlay.fade-out {
+    animation: linkedin-scraper-fadeOut 0.3s ease-in forwards;
+}
+
+@keyframes linkedin-scraper-fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

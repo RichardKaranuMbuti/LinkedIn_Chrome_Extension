@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Job Scraper</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="icons/icon48.png" alt="Logo" class="logo">
+            <h1>Job Scraper</h1>
+        </header>
+
+        <main class="main-content">
+            <!-- Search Form -->
+            <form id="searchForm" class="search-form">
+                <div class="form-group">
+                    <label for="jobTitle">Job Title:</label>
+                    <input 
+                        type="text" 
+                        id="jobTitle" 
+                        name="jobTitle" 
+                        placeholder="e.g., Software Engineer"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input 
+                        type="text" 
+                        id="location" 
+                        name="location" 
+                        placeholder="e.g., New York, NY"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="maxPages">Max Pages:</label>
+                    <select id="maxPages" name="maxPages">
+                        <option value="1">1 page (~25 jobs)</option>
+                        <option value="2" selected>2 pages (~50 jobs)</option>
+                        <option value="3">3 pages (~75 jobs)</option>
+                        <option value="5">5 pages (~125 jobs)</option>
+                        <option value="10">10 pages (~250 jobs)</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="startScraping" class="btn btn-primary">
+                    <span class="btn-text">Start Scraping</span>
+                    <div class="btn-spinner hidden"></div>
+                </button>
+            </form>
+
+            <!-- Recent Searches -->
+            <div class="recent-searches hidden" id="recentSearches">
+                <h3>Recent Searches</h3>
+                <div class="recent-list" id="recentList"></div>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section hidden" id="progressSection">
+                <h3>Scraping Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Initializing...</div>
+                <div class="progress-stats">
+                    <span id="jobsFound">0</span> jobs found
+                </div>
+                <button id="stopScraping" class="btn btn-secondary">Stop Scraping</button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section hidden" id="resultsSection">
+                <h3>Scraping Complete</h3>
+                <div class="results-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="totalJobs">0</span>
+                        <span class="stat-label">Total Jobs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="successRate">0%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="duration">0s</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                </div>
+                <div class="results-actions">
+                    <button id="exportData" class="btn btn-outline">Export Data</button>
+                    <button id="viewJobs" class="btn btn-outline">View Jobs</button>
+                    <button id="newSearch" class="btn btn-primary">New Search</button>
+                </div>
+            </div>
+
+            <!-- Status Messages -->
+            <div class="status-message hidden" id="statusMessage">
+                <span class="status-text" id="statusText"></span>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="../options/options.html" target="_blank">Settings</a>
+                <span>•</span>
+                <a href="#" id="helpLink">Help</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../utils/constants.js"></script>
+    <script src="../utils/helpers.js"></script>
+    <script src="../utils/storage.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
